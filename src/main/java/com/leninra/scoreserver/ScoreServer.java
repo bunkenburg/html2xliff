@@ -1,4 +1,4 @@
-package com.king.scoreserver;
+package com.leninra.scoreserver;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -14,26 +14,31 @@ public class ScoreServer {
 	
 	public static void main(String[] args) {
 		
+		try {
+			new ScoreServer().start("/");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		
+	}
+	
+	public HttpServer start(String context) throws IOException {
+		
 		log.debug("Hello, King!");
 		
 		InetSocketAddress addr = new InetSocketAddress(8888);
 		
-		try {
+		HttpServer server = HttpServer.create(addr, 0);
+		server.createContext(context, new HttpRequestHandler());
 			
-			HttpServer server = HttpServer.create(addr, 0);
-			server.createContext("/", new RequestHandler());
-			 
-			// Using default CachedThreadPool Executor for optimal 
-			// concurrent request performance without reinventing the wheel
-			server.setExecutor(Executors.newCachedThreadPool());
+		server.setExecutor(Executors.newCachedThreadPool());
 			
-			server.start();
+		server.start();
 			
-			log.debug("Server is listening.");
+		log.debug("Server running on port 8888.");
+			
+		return server;
 		  
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-		}
 		
 	}
 	
