@@ -1,21 +1,22 @@
-# score-server
+# html2xliff
 
+Technical solutions
+
+	- dom4j library is used for parsing because it is flexible, performant and memory-efficient
+	- dom4j API for parsing and building documents makes the code human readable and easily maintainable
+	- Recursion algorithm is perfect for traversing trees of predictable depth
+	
 Performance considerations
 
-	- Unnecessary iteration and looping is avoided in sorting the highscores list.
-	- Unnecessary copying of data is avoided in concurrency strategies.
-	
-Concurrence considerations
-
-	- Highscores list is being kept in order in asynchronous mode, ie. it is always in correct order.
-	- Iterators are avoided to make sure ConcurrentModificationException would not occur.
-	- Concurrent methods are marked as 'synchronous' to ensure thread safe data access.
+	- Parsing should require O(n) time and O(n) memory because the tree is traversed systematically from bottom to top after it's created and new memory is allocated only for the XLIFF DOM which takes up roughly the same amount of memory as the original one.
 	
 Running
 
-	java -jar score-server.jar
+	java -jar html2xliff.jar ["This is <b>very</b> important"]
 	
-Other
+Testing
+
+	java -cp html2xliff.jar org.junit.runner.JUnitCore test.leninra.html2xliff.Html2XliffTest
 
 	
 

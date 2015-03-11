@@ -9,7 +9,7 @@
 		<Root level="error">
 			<AppenderRef ref="Console" />
 		</Root>
-		<logger name="com.king.scoreserver" level="DEBUG" />
+		<logger name="com.leninra.html2xliff" level="INFO" />
 		<Root level="ERROR">
 			<AppenderRef ref="CONSOLE"/>
 		</Root>
